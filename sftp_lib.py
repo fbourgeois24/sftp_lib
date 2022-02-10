@@ -32,28 +32,26 @@ class sftp_client():
 		# Connexion au serveur en ssh
 		self.ssh.connect(self.server_addr, username=username, pkey = pkey)
 
-	def disconnect(self):
-		# Déconnexion du serveur ssh
-		self.ssh.disconnect()
 
-
-	def open_sftp(self):
+	def open(self, auto_connect=True):
 		""" Ouverture du sftp """
+		self.auto_connect = auto_connect
+		if auto_connect:
+			self.connect()
 		self.sftp = self.ssh.open_sftp()
 
 
-	def close_sftp(self):
+	def close(self):
 		""" Fermeture du sftp """
-		self.sftp.close_sftp()
+		self.sftp.close()
 
 
 	def __enter__(self):
 		# Ouverture avec WITH
 		self.connect()
-		self.open_sftp()
+		self.open()
 		return self.sftp
 
 	def __exit__(self):
 		# Fermeture après WITH
-		self.close_sftp()
-		self.disconnect()
+		self.close()
