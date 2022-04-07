@@ -16,6 +16,8 @@ class sftp_client():
 		# Si clé de type ed25519
 		if key_type == "ed25519":
 			self.key = paramiko.Ed25519Key.from_private_key_file(key_file, password=key_passwd)
+		elif key_type == "rsa":
+			self.key = paramiko.RSAKey.from_private_key_file(key_file, password=key_passwd)
 		else:
 			raise ValueError("Wrong key type")
 
