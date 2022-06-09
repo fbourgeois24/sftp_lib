@@ -57,6 +57,6 @@ class sftp_client():
 		self.open()
 		return self.sftp
 
-	def __exit__(self):
+	def __exit__(self, *args, **kwargs):
 		# Fermeture après WITH
 		self.close()
