@@ -4,9 +4,6 @@ class sftp_client():
 	def __init__(self, server_addr, username, key_file, key_type, key_passwd=None, host_verify=True):
 		self.server_addr = server_addr
 		self.username = username
-		# self.key_file = key_file
-		# self.key_type = key_type
-		# self.key_passwd = key_passwd
 		self.ssh = paramiko.SSHClient()
 
 		# Si on ne vérifie pas l'hôte
