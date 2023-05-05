@@ -1,8 +1,9 @@
 import paramiko
 
 class sftp_client():
-	def __init__(self, server_addr, username, key_file, key_type, key_passwd=None, host_verify=True):
+	def __init__(self, server_addr, username, key_file, key_type, key_passwd=None, host_verify=True, server_port=22):
 		self.server_addr = server_addr
+		self.server_port = server_port
 		self.username = username
 		self.ssh = paramiko.SSHClient()
 
@@ -29,7 +30,7 @@ class sftp_client():
 			pkey = self.key
 
 		# Connexion au serveur en ssh
-		self.ssh.connect(self.server_addr, username=username, pkey = pkey)
+		self.ssh.connect(hostname=self.server_addr, port=self.server_port, username=username, pkey=pkey)
 
 	def disconnect(self):
 		""" Déconnexion du ssh """
